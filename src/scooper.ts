@@ -60,7 +60,7 @@ interface TokenBalance {
 const USDC_TOKEN_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
 
 const liquidStableTokens = ["mSOL", "JitoSOL", "bSOL", "mrgnLST", "jSOL", "stSOL", "scnSOL", "LST"];
-const forbiddenTokens = ["Bonk", "USDC", "USDT"].concat(liquidStableTokens);
+const forbiddenTokens = ["USDC", "USDT"].concat(liquidStableTokens);
 
 const distributionTargets: [PublicKey, number][] = [
   [
