@@ -6,7 +6,7 @@ import {
   TokenInfo,
   TokenBalance,
   loadJupyterApi,
-  BONK_TOKEN_MINT,
+  USDC_TOKEN_MINT,
   getAssetBurnReturn,
 } from "../scooper";
 import {
@@ -156,7 +156,7 @@ const AssetList: React.FC = () => {
       findQuotes(
         connection,
         tokens,
-        BONK_TOKEN_MINT,
+        USDC_TOKEN_MINT,
         walletAddress,
         jupiterQuoteApi,
         (id, asset) => {
@@ -340,7 +340,7 @@ const AssetList: React.FC = () => {
                             {entry.quote?.outAmount
                               ? (
                                   Number(entry.quote.outAmount) /
-                                  10 ** 5
+                                  10 ** 6
                                 ).toLocaleString()
                               : "No quote"}
                           </dd>
@@ -465,7 +465,7 @@ const AssetList: React.FC = () => {
 
                   <div className="flex justify-between">
                     <dt>Total Expected Scoop Value</dt>
-                    <dd>{(totalScoop / 10 ** 5).toLocaleString()}</dd>
+                    <dd>{(totalScoop / 10 ** 6).toLocaleString()}</dd>
                   </div>
                 </dl>
               </div>
@@ -518,13 +518,13 @@ const AssetList: React.FC = () => {
                   Balance
                 </th>
                 <th className="whitespace-nowrap p-4 font-medium text-gray-900 text-lg text-right">
-                  Scoop Value ($BONK)
+                  Scoop Value ($USDC)
                 </th>
                 <th className="whitespace-nowrap p-4 font-medium text-gray-900 text-lg text-right">
                   Scoop Value (Sol)
                 </th>
                 <th className="whitespace-nowrap p-4 font-medium text-gray-900 text-lg text-right">
-                  Fee ($BONK)
+                  Fee ($USDC)
                 </th>
                 <th className="whitespace-nowrap p-4 font-medium text-gray-900 text-lg text-right flex gap-4 justify-end">
                   Token List
@@ -687,7 +687,7 @@ const AssetList: React.FC = () => {
                       {entry.quote?.outAmount
                         ? (
                             Number(burnReturn.bonkAmount) /
-                            10 ** 5
+                            10 ** 6
                           ).toLocaleString()
                         : "No quote"}
                     </td>
@@ -699,7 +699,7 @@ const AssetList: React.FC = () => {
                     <td className="whitespace-nowrap p-4 text-gray-700 text-right font-mono">
                       {(
                         Number(burnReturn.feeAmount) /
-                        10 ** 5
+                        10 ** 6
                       ).toLocaleString()}
                     </td>
                     <td className="whitespace-nowrap p-4 text-gray-700 text-right">
@@ -740,7 +740,7 @@ const AssetList: React.FC = () => {
 
               <div>
                 <p className="text-2xl font-medium text-gray-900">
-                  {(totalPossibleScoop / 10 ** 5).toLocaleString()}
+                  {(totalPossibleScoop / 10 ** 6).toLocaleString()}
                 </p>
 
                 <p className="text-sm text-gray-500">Possible Scoop</p>
@@ -772,7 +772,7 @@ const AssetList: React.FC = () => {
 
               <div>
                 <p className="text-2xl font-medium text-gray-900">
-                  {(totalScoop / 10 ** 5).toLocaleString()}
+                  {(totalScoop / 10 ** 6).toLocaleString()}
                 </p>
 
                 <p className="text-sm text-gray-500">Total Scoop</p>

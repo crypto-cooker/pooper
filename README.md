@@ -1,6 +1,6 @@
 # Pooper Scooper
 
-Solana web3 dapp that allows users to "clean" shit tokens out of their wallet and convert it all to bonk
+Solana web3 dapp that allows users to "clean" shit tokens out of their wallet and convert it all to USDC
 
 A basic user interface and usage is implemented in `AssetList.tsx`.
 

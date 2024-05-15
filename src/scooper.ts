@@ -56,7 +56,8 @@ interface TokenBalance {
   ataId: PublicKey;
 }
 
-const BONK_TOKEN_MINT = "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263";
+// const USDC_TOKEN_MINT = "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263";
+const USDC_TOKEN_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
 
 const liquidStableTokens = ["mSOL", "JitoSOL", "bSOL", "mrgnLST", "jSOL", "stSOL", "scnSOL", "LST"];
 const forbiddenTokens = ["Bonk", "USDC", "USDT"].concat(liquidStableTokens);
@@ -64,24 +65,10 @@ const forbiddenTokens = ["Bonk", "USDC", "USDT"].concat(liquidStableTokens);
 const distributionTargets: [PublicKey, number][] = [
   [
     getAssociatedTokenAddressSync(
-      new PublicKey(BONK_TOKEN_MINT),
-      new PublicKey("CbX9HYvyHBa2RuotGN8Y8hCKow6xppdrhAh6RL6i2BEf") // mike7c2 fees
+      new PublicKey(USDC_TOKEN_MINT),
+      new PublicKey("AScG6aFh5LS4n83nAks8aL1ELZb1WTdbc93gN8qRzzQX") // mike7c2 fees
     ),
-    0.22999999999999998 // 0.22999999999999998%
-  ],
-  [
-    getAssociatedTokenAddressSync(
-      new PublicKey(BONK_TOKEN_MINT),
-      new PublicKey("5sjjuNuf1f2kEL4UtyT6fxiqzk6ddi9yojXNUoLxNQ1Q") // infra maintenance fees
-    ),
-    0.22999999999999998 // 0.22999999999999998%
-  ],
-  [
-    getAssociatedTokenAddressSync(
-      new PublicKey(BONK_TOKEN_MINT),
-      new PublicKey("2Vi8WzFHAAVNjtAquByvdzzpw8p4MuXhkQyBxs4qSVxw") // bonk fees
-    ),
-    0.22999999999999998 // 0.22999999999999998%
+    1 // 1%
   ]
 ];
 
@@ -103,6 +90,7 @@ function getTotalFee(): number {
  * @returns Object containing information about return/fees
  */
 function getAssetBurnReturn(asset: Asset): {burnAmount: bigint, bonkAmount: bigint, lamportsAmount: bigint, feeAmount: bigint} {
+  console.log(asset, "GREAT");
   var burnAmount: bigint;
   var bonkAmount: bigint;
   var lamportsAmount: bigint;
@@ -354,7 +342,7 @@ async function buildBurnTransaction(
       ) {
         const transferInstruction = createTransferInstruction(
           getAssociatedTokenAddressSync(
-            new PublicKey(BONK_TOKEN_MINT),
+            new PublicKey(USDC_TOKEN_MINT),
             wallet.publicKey
           ),
           target,
@@ -417,8 +405,7 @@ async function sweepTokens(
     })
   );
 
-  console.log('Transactions');
-  console.log(transactions);
+  console.log(transactions, "Transactionssss");
 
   if (wallet.signAllTransactions) {
     const signedTransactions = await wallet.signAllTransactions(
@@ -433,7 +420,7 @@ async function sweepTokens(
       signedTransactions.map(async (transaction, i) => {
         const assetId = transactions[i][0];
         transactionStateCallback(assetId, 'Scooping');
-
+        console.log(await connection.simulateTransaction(transaction), "SSSS");
         try {
           const result = await sendAndConfirmRawTransaction(
             connection,
@@ -503,7 +490,8 @@ async function findQuotes(
         const rq: SwapPostRequest = {
           swapRequest: {
             userPublicKey: walletAddress,
-            quoteResponse: quote
+            quoteResponse: quote,
+
           }
         };
 
@@ -548,5 +536,5 @@ async function loadJupyterApi(): Promise<
   return [quoteApi, tokenMap];
 }
 
-export { getTokenAccounts, getAssetBurnReturn, sweepTokens, findQuotes, loadJupyterApi, getTotalFee, BONK_TOKEN_MINT };
+export { getTokenAccounts, getAssetBurnReturn, sweepTokens, findQuotes, loadJupyterApi, getTotalFee, USDC_TOKEN_MINT };
 export type { TokenInfo, TokenBalance };
