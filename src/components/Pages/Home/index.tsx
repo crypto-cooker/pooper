@@ -99,8 +99,7 @@ const Home: React.FC = () => {
             textAlign: "center",
           }}
         >
-          Dive into the world of CRASHCOIN, a community-driven meme token on the
-          Solana network, designed to defy the odds.
+          Use swivul to fully stable all of your assets
         </Typography>
       </Stack>
     </Stack>
